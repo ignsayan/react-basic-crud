@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,18 +22,20 @@ export default function Login() {
         });
     }
 
-    if (response) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-        toast.success(response.msg);
-    } else {
-        toast.error(error?.msg);
-    }
+    useEffect(() => {
+        if (response) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+            toast.success(response.msg);
+        } else {
+            toast.error(error?.msg);
+        }
+    }, [response, error])
 
     return (
         <>
             {
                 loading
-                    ? <Loader type="hourglass" bgColor="#0d6efd" color="#0d6efd" size={100} />
+                    ? <Loader type="hourglass" bgColor="#212529" size={100} />
                     : <div>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -45,12 +47,12 @@ export default function Login() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password"
+                                <Form.Control type="password" placeholder="Password" value={body.password}
                                     onChange={(e) => setBody({ ...body, password: e.target.value })} />
                                 {error?.errors?.password && <Form.Text className="text-danger">{error?.errors?.password}</Form.Text>}
                             </Form.Group>
 
-                            <Button variant="primary" type="submit"
+                            <Button variant="dark" type="submit"
                                 onClick={handleLogin}>Login</Button>
                         </Form>
                         <ToastContainer />
