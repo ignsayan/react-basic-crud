@@ -62,7 +62,7 @@ function Register() {
                             <Form.Group as={Col} md="4" controlId="validationCustom01">
                                 <Form.Label>First name</Form.Label>
                                 <Form.Control
-                                    
+                                    required
                                     type="text"
                                     placeholder="First name"
                                     defaultValue={body.first_name}
