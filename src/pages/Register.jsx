@@ -39,9 +39,8 @@ function Register() {
     };
     useEffect(() => {
         if (response) {
-            localStorage.setItem('user', JSON.stringify(response.data));
             toast.success(response.msg);
-            navigate('/verify-email-info');
+            navigate(`/verify-email-info/${response.data.email}/${response.data.uuid}`);
         } else {
             toast.error(error?.msg);
         }
@@ -61,8 +60,7 @@ function Register() {
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationCustom01">
                                 <Form.Label>First name</Form.Label>
-                                <Form.Control
-                                    required
+                                <Form.Control 
                                     type="text"
                                     placeholder="First name"
                                     defaultValue={body.first_name}
@@ -94,29 +92,29 @@ function Register() {
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationCustomUsername">
                                 <Form.Label>Email</Form.Label>
-                                
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Email"
-                                        aria-describedby="inputGroupPrepend"
-                                        required
-                                        name='email'
-                                        defaultValue={body.email}
-                                        onChange={(e) => onChangeHandler(e)}
 
-                                    />
-                                    {error?.errors?.email ? <Form.Text className='text-danger'>{error?.errors?.email[0]}</Form.Text> :
-                                        <Form.Control.Feedback type="invalid">
-                                            Please choose a valid email address.
-                                        </Form.Control.Feedback>
-                                    }
-                                
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Email"
+                                    aria-describedby="inputGroupPrepend"
+                                    required
+                                    name='email'
+                                    defaultValue={body.email}
+                                    onChange={(e) => onChangeHandler(e)}
+
+                                />
+                                {error?.errors?.email ? <Form.Text className='text-danger'>{error?.errors?.email[0]}</Form.Text> :
+                                    <Form.Control.Feedback type="invalid">
+                                        Please choose a valid email address.
+                                    </Form.Control.Feedback>
+                                }
+
                             </Form.Group>
                         </Row>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationCustom03">
                                 <Form.Label>Phone</Form.Label>
-                                <Form.Control type="number" name='phone_no' placeholder="Phone" required 
+                                <Form.Control type="number" name='phone_no' placeholder="Phone" required
                                     onChange={(e) => onChangeHandler(e)}
                                     defaultValue={body.phone_no}
                                 />
@@ -128,7 +126,7 @@ function Register() {
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationCustom04">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control name='password' type="password" placeholder="State" required 
+                                <Form.Control name='password' type="password" placeholder="State" required
                                     onChange={(e) => onChangeHandler(e)}
                                 />
                                 {error?.errors?.password ? <Form.Text className='text-danger'>{error?.errors?.password[0]}</Form.Text> :
@@ -139,7 +137,7 @@ function Register() {
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationCustom05">
                                 <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control name='password_confirmation' type="password" placeholder="Confirm Password" required 
+                                <Form.Control name='password_confirmation' type="password" placeholder="Confirm Password" required
                                     onChange={(e) => onChangeHandler(e)}
                                 />
                                 {error?.errors?.password_confirmation ? <Form.Text className='text-danger'>{error?.errors?.password_confirmation[0]}</Form.Text> :
