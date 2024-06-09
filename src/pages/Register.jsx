@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import useAxios from '../hooks/useAxios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -45,6 +44,7 @@ function Register() {
             toast.error(error?.msg);
         }
     }, [response, error])
+
     return (
         <Container>
             <ToastContainer />
@@ -60,7 +60,7 @@ function Register() {
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationCustom01">
                                 <Form.Label>First name</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     type="text"
                                     placeholder="First name"
                                     defaultValue={body.first_name}
@@ -126,7 +126,7 @@ function Register() {
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationCustom04">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control name='password' type="password" placeholder="State" required
+                                <Form.Control name='password' type="password" placeholder="Enter Password" required
                                     onChange={(e) => onChangeHandler(e)}
                                 />
                                 {error?.errors?.password ? <Form.Text className='text-danger'>{error?.errors?.password[0]}</Form.Text> :
@@ -147,7 +147,7 @@ function Register() {
                                 }
                             </Form.Group>
                         </Row>
-                        <Button type="submit">Submit form</Button>
+                        <Button variant="dark" type="submit">Register</Button>
                     </Form>
                 </div>
             }

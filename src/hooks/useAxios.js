@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const useAxios = () => {
 
@@ -32,7 +31,7 @@ const useAxios = () => {
         }
     }, [])
 
-    const apiHandler = async ({ url, method, data = {}, params = {} }) => {
+    const apiHandler = async ({ url, headers = {}, method, data = {}, params = {} }) => {
 
         setLoading(true)
         controller.abort()
@@ -41,6 +40,7 @@ const useAxios = () => {
         try {
             const result = await axiosInstance({
                 url,
+                headers,
                 method,
                 data,
                 params,
