@@ -12,12 +12,6 @@ export default function Navbar() {
     const { response, error, loading, apiHandler } = useAxios();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!auth.isAuthenticated) {
-            navigate('/login');
-        }
-    }, [auth.isAuthenticated])
-
     const handleLogout = () => {
 
         apiHandler({
@@ -31,6 +25,7 @@ export default function Navbar() {
         Cookies.remove('access_token');
         localStorage.removeItem('user');
         auth.dispatch();
+        navigate('/login');
     }
 
     return (
