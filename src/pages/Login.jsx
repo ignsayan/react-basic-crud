@@ -40,7 +40,7 @@ export default function Login() {
 
     return (
         <Container>
-            <ToastContainer />
+            <ToastContainer position='bottom-center' />
             {loading
                 ? <Loader type="hourglass" bgColor="#212529" size={100} />
                 : <div className='row justify-content-center'>

@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthState } from './contexts/authentication';
 import { AppRoutes } from './routes/AppRoutes';
-import { Navbar } from './components';
+import Navbar from './components/Navbar';
 
 export default function App() {
 
