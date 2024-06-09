@@ -32,7 +32,7 @@ export default function Navbar() {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <Container>
-                    <a className="navbar-brand" href="/">{import.meta.env.VITE_APP_NAME}</a>
+                    <a className="navbar-brand" href="/">Home</a>
                     {
                         !auth.isAuthenticated
                             ? <Button variant="light" href='/login'>Login</Button>
