@@ -3,14 +3,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthState } from './contexts/authentication';
 import { AppRoutes } from './routes/AppRoutes';
-import Navbar from './components/Navbar';
+import NavBar from './components/Navbar';
 
 export default function App() {
 
     return (
         <>
             <AuthState>
-                <Navbar />
+                <NavBar />
                 <AppRoutes />
             </AuthState>
         </>

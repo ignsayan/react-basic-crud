@@ -28,7 +28,10 @@ export default function Login() {
     }
     useEffect(() => {
         if (response) {
-            Cookies.set('access_token', response.data.bearer_token);
+            Cookies.set('access_token', response.data.bearer_token, {
+                secure: true,
+                sameSite: 'strict'
+            });
             const { bearer_token, ...user } = response.data;
             localStorage.setItem('user', JSON.stringify(user));
             auth.dispatch();

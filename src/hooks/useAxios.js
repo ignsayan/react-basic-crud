@@ -1,5 +1,6 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const useAxios = () => {
 
@@ -12,7 +13,9 @@ const useAxios = () => {
     })
 
     axiosInstance.interceptors.request.use((config) => {
-        return config
+        config.headers['Accept'] = 'application/json'
+        config.headers['Authorization'] = Cookies.get('access_token') && `Bearer ${Cookies.get('access_token')}`
+        return config;
     }, (error) => {
         return Promise.reject(error)
     })

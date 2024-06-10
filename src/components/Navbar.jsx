@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import React, { useContext } from 'react'
+import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../contexts/authentication';
 import useAxios from '../hooks/useAxios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function NavBar() {
 
     const auth = useContext(AuthContext);
     const { response, error, loading, apiHandler } = useAxios();
@@ -16,16 +16,14 @@ export default function Navbar() {
 
         apiHandler({
             url: '/api/logout',
-            headers: {
-                'Authorization': `Bearer ${Cookies.get('access_token')}`
-            },
             method: 'POST',
         })
-
-        Cookies.remove('access_token');
-        localStorage.removeItem('user');
-        auth.dispatch();
-        navigate('/login');
+            .finally(() => {
+                Cookies.remove('access_token');
+                localStorage.removeItem('user');
+                auth.dispatch();
+                navigate('/login');
+            })
     }
 
     return (
