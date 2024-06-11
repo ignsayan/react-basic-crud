@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../contexts/authentication';
 import useAxios from '../hooks/useAxios';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
