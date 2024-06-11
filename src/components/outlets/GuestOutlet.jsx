@@ -7,6 +7,6 @@ export default function GuestOutlet() {
     const auth = useContext(AuthContext);
 
     return (
-        auth.isAuthenticated ? <Navigate to="/" /> : <Outlet />
+        auth.isAuthenticated ? <Navigate to="/users" /> : <Outlet />
     )
 }
