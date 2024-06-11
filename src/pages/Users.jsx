@@ -4,53 +4,38 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Container, Table } from 'react-bootstrap';
 import Loader from 'react-js-loader';
 import Datatable from '../components/Datatable';
+import { Search } from '../components/Search';
+import { useSearchParams } from 'react-router-dom';
 import Paginator from '../components/Paginator';
 
 export default function Users() {
 
-    const [users, setUsers] = useState({});
+    const [users, setUsers] = useState([]);
     const { response, error, loading, apiHandler } = useAxios();
 
-    const fetchUsers = (page = 1) => {
+    useEffect(() => {
         apiHandler({
-            url: `/api/users?page=${page}`,
+            url: '/api/users',
             method: 'GET',
         });
-    };
-    useEffect(() => {
-        fetchUsers();
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (response) {
-            setUsers(response);
-        } else if (error) {
-            toast.error(error.msg);
+            setUsers(response.data);
+            toast.success('Users fetched successfully');
+        } else {
+            toast.error(error?.msg);
         }
-    }, [response, error]);
-
-    const handlePageChange = (page) => {
-        fetchUsers(page);
-    };
+    }, [response, error])
 
     return (
         <Container>
             <ToastContainer position='bottom-center' />
+            <Search  onSearchChange={(e) => onSearchChange(e.target.value)} />
             {loading
                 ? <Loader type="hourglass" bgColor="#212529" size={100} />
-                : users?.data?.length > 0
-                    ? <>
-                        <Datatable users={users?.data} />
-                        <Paginator pagination={users}
-                            onPageChange={handlePageChange} />
-                    </>
-                    : <Table striped bordered hover className='text-center my-5'>
-                        <tbody>
-                            <tr>
-                                <td>No data found</td>
-                            </tr>
-                        </tbody>
-                    </Table>
+                : <DataTable data={users}/>
             }
         </Container>
     )

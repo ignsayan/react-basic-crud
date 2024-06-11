@@ -11,7 +11,7 @@ const useAxios = () => {
     const axiosInstance = axios.create({
         baseURL: import.meta.env.VITE_API_URL,
     })
-
+    //pre configure stuff, will add automatically if header attached later
     axiosInstance.interceptors.request.use((config) => {
         config.headers['Accept'] = 'application/json'
         config.headers['Authorization'] = Cookies.get('access_token') && `Bearer ${Cookies.get('access_token')}`
