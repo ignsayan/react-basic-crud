@@ -6,7 +6,7 @@ import useAxios from '../hooks/useAxios';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 
-export default function NavBar() {
+export default function Navbar() {
 
     const auth = useContext(AuthContext);
     const { response, error, loading, apiHandler } = useAxios();
