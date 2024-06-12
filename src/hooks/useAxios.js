@@ -53,7 +53,7 @@ const useAxios = () => {
 
         } catch (error) {
             if (axios.isCancel(error)) {
-                console.log('Request canceled', error.message)
+                console.log('API call', error.message)
             } else {
                 setError(error.response ? error.response.data : error.message)
             }

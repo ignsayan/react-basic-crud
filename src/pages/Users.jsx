@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../hooks/useAxios';
 import { ToastContainer, toast } from 'react-toastify';
-import { Container, Table } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Loader from 'react-js-loader';
 import Datatable from '../components/Datatable';
 import Paginator from '../components/Paginator';
@@ -56,19 +56,11 @@ export default function Users() {
             <Search value={search} handleSearch={(e) => setSearch(e.target.value)} />
             {loading
                 ? <Loader type="hourglass" bgColor="#212529" size={100} />
-                : users?.data?.length > 0
-                    ? <>
-                        <Datatable users={users?.data} />
-                        <Paginator pagination={users}
-                            onPageChange={handlePageChange} />
-                    </>
-                    : <Table striped bordered hover className='text-center my-5'>
-                        <tbody>
-                            <tr>
-                                <td>No data found</td>
-                            </tr>
-                        </tbody>
-                    </Table>
+                : <>
+                    <Datatable users={users?.data} />
+                    <Paginator pagination={users}
+                        onPageChange={handlePageChange} />
+                </>
             }
         </Container>
     )
