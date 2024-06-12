@@ -42,6 +42,19 @@ export default function Paginator({ pagination, onPageChange }) {
     return (
         <>
             <Pagination className="justify-content-end">
+                <Form onSubmit={handleJumpToPage}
+                    className="d-flex mx-3">
+                    <Form.Control
+                        type="number"
+                        min="1" max={lastPage}
+                        value={pageInput} required
+                        placeholder="Jump to page"
+                        onChange={(e) => setPageInput(e.target.value)}
+                        className="form-control"
+                        style={{ width: '150px', marginRight: '5px' }}
+                    />
+                    <Button type="submit" variant="primary">Go</Button>
+                </Form>
                 <Pagination.First
                     onClick={() => handlePageClick(1)}
                     disabled={currentPage === 1} />
@@ -58,20 +71,6 @@ export default function Paginator({ pagination, onPageChange }) {
                     onClick={() => handlePageClick(lastPage)}
                     disabled={currentPage === lastPage} />
             </Pagination>
-
-            <Form onSubmit={handleJumpToPage}
-                className="justify-content-end mb-2 d-flex">
-                <Form.Control
-                    type="number"
-                    min="1" max={lastPage}
-                    value={pageInput} required
-                    placeholder="Jump to page"
-                    onChange={(e) => setPageInput(e.target.value)}
-                    className="form-control"
-                    style={{ width: '150px', marginRight: '5px' }}
-                />
-                <Button type="submit" variant="primary">Go</Button>
-            </Form>
         </>
     );
 };
