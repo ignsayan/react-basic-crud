@@ -3,8 +3,8 @@ import { Pagination, Form, Button } from 'react-bootstrap';
 
 export default function Paginator({ pagination, onPageChange }) {
 
-    const lastPage = pagination.last_page;
     const currentPage = pagination.current_page;
+    const lastPage = pagination.last_page;
     const [pageInput, setPageInput] = useState('');
 
     const handlePageClick = (page) => {
