@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 const useAxios = () => {
 
@@ -26,19 +27,19 @@ const useAxios = () => {
         return Promise.reject(error)
     })
 
-    let controller = new AbortController()
+    // let controller = new AbortController()
 
-    useEffect(() => {
-        return () => {
-            controller?.abort()
-        }
-    }, [])
+    // useEffect(() => {
+    //     return () => {
+    //         controller?.abort()
+    //     }
+    // }, [])
 
     const apiHandler = async ({ url, headers = {}, method, data = {}, params = {} }) => {
 
         setLoading(true)
-        controller.abort()
-        controller = new AbortController()
+        // controller.abort()
+        // controller = new AbortController()
 
         try {
             const result = await axiosInstance({
@@ -47,16 +48,17 @@ const useAxios = () => {
                 method,
                 data,
                 params,
-                signal: controller.signal
+                // signal: controller.signal
             })
             setResponse(result.data)
 
         } catch (error) {
-            if (axios.isCancel(error)) {
-                console.log('API call', error.message)
-            } else {
-                setError(error.response ? error.response.data : error.message)
-            }
+            setError(error.response ? error.response.data : error.message)
+            // if (axios.isCancel(error)) {
+            //     console.log('API call', error.message)
+            // } else {
+            //     setError(error.response ? error.response.data : error.message)
+            // }
 
         } finally {
             setLoading(false)
