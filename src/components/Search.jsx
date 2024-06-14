@@ -10,7 +10,7 @@ export const Search = ({
     onDateChange,
     value
 }) => {
-    
+
     return (
         <Form className='mt-3'>
             <Row>
@@ -23,9 +23,9 @@ export const Search = ({
                         onChange={(e) => handleSearch(e)}
                     />
                 </Col>
-                <Col xs="auto">
-                    {/* <Button onClick={()=>handleSearch()} type="button">Submit</Button> */}
-                </Col>
+                {/* <Col xs="auto">
+                    <Button onClick={()=>handleSearch()} type="button">Submit</Button>
+                </Col> */}
             </Row>
         </Form>
     )

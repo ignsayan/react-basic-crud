@@ -5,7 +5,6 @@ import { Container } from 'react-bootstrap';
 import Loader from 'react-js-loader';
 import Datatable from '../components/Datatable';
 import Paginator from '../components/Paginator';
-import { useSearchParams } from 'react-router-dom';
 import { Search } from '../components/Search';
 
 export default function Users() {
@@ -21,8 +20,11 @@ export default function Users() {
         });
     };
     useEffect(() => {
-        fetchUsers();
-    }, []);
+        const searchUsers = setTimeout(() => {
+            fetchUsers();
+        }, search != null ? 500 : 0);
+        return () => clearTimeout(searchUsers);
+    }, [search]);
 
     useEffect(() => {
         if (response) {
@@ -32,16 +34,6 @@ export default function Users() {
         }
     }, [response, error]);
 
-    const handlePageChange = (page) => {
-        fetchUsers(page);
-    };
-
-    useEffect(() => {
-        const searchUsers = setTimeout(() => {
-            fetchUsers();
-        }, search != null ? 500 : 0);
-        return () => clearTimeout(searchUsers);
-    }, [search])
 
     return (
         <Container>
@@ -52,7 +44,7 @@ export default function Users() {
                 : <>
                     <Datatable users={users?.data} />
                     <Paginator pagination={users}
-                        onPageChange={handlePageChange} />
+                        onPageChange={(page) => fetchUsers(page)} />
                 </>
             }
         </Container>

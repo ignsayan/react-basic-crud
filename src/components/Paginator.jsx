@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pagination, Form, Button } from 'react-bootstrap';
+import { Pagination, Form, Button, Row, Col } from 'react-bootstrap';
 
 export default function Paginator({ pagination, onPageChange }) {
 
@@ -42,37 +42,45 @@ export default function Paginator({ pagination, onPageChange }) {
 
     return (
         <>
-            {pagination?.data?.length < totalPages
-                && < Pagination className="justify-content-end">
-                    <Form onSubmit={handleJumpToPage}
-                        className="d-flex mx-3">
-                        <Form.Control
-                            type="number"
-                            min="1" max={lastPage}
-                            value={pageInput} required
-                            placeholder="Jump to page"
-                            onChange={(e) => setPageInput(e.target.value)}
-                            className="form-control"
-                            style={{ width: '150px', marginRight: '5px' }}
-                        />
-                        <Button type="submit" variant="primary">Go</Button>
-                    </Form>
-                    <Pagination.First
-                        onClick={() => handlePageClick(1)}
-                        disabled={currentPage === 1} />
-                    <Pagination.Prev
-                        onClick={() => handlePageClick(currentPage - 1)}
-                        disabled={currentPage === 1} >Prev
-                    </Pagination.Prev>
-                    {renderPaginationItems()}
-                    <Pagination.Next
-                        onClick={() => handlePageClick(currentPage + 1)}
-                        disabled={currentPage === lastPage}>Next
-                    </Pagination.Next>
-                    <Pagination.Last
-                        onClick={() => handlePageClick(lastPage)}
-                        disabled={currentPage === lastPage} />
-                </Pagination>
+            {pagination?.data?.length < totalPages &&
+                <>
+                    <Row>
+                        <Col>
+                            <Form onSubmit={handleJumpToPage}
+                                className="d-flex">
+                                <Form.Control
+                                    type="number"
+                                    min="1" max={lastPage}
+                                    value={pageInput} required
+                                    placeholder="Jump to page"
+                                    onChange={(e) => setPageInput(e.target.value)}
+                                    className="form-control"
+                                    style={{ width: '150px', marginRight: '5px' }}
+                                />
+                                <Button type="submit" variant="primary">Go</Button>
+                            </Form>
+                        </Col>
+                        <Col>
+                            < Pagination className="justify-content-end">
+                                <Pagination.First
+                                    onClick={() => handlePageClick(1)}
+                                    disabled={currentPage === 1} />
+                                <Pagination.Prev
+                                    onClick={() => handlePageClick(currentPage - 1)}
+                                    disabled={currentPage === 1} >Prev
+                                </Pagination.Prev>
+                                {renderPaginationItems()}
+                                <Pagination.Next
+                                    onClick={() => handlePageClick(currentPage + 1)}
+                                    disabled={currentPage === lastPage}>Next
+                                </Pagination.Next>
+                                <Pagination.Last
+                                    onClick={() => handlePageClick(lastPage)}
+                                    disabled={currentPage === lastPage} />
+                            </Pagination>
+                        </Col>
+                    </Row>
+                </>
             }
         </>
     );
