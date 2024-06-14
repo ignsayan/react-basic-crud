@@ -10,13 +10,13 @@ import { Search } from '../components/Search';
 
 export default function Users() {
 
-    const [search, setSearch] = useState('');
     const [users, setUsers] = useState({});
     const { response, error, loading, apiHandler } = useAxios();
+    const [search, setSearch] = useState('');
 
     const fetchUsers = (page = 1) => {
         apiHandler({
-            url: `/api/users?page=${page}`,
+            url: `/api/users?page=${page}&search=${search}`,
             method: 'GET',
         });
     };
@@ -38,14 +38,7 @@ export default function Users() {
 
     useEffect(() => {
         const searchUsers = setTimeout(() => {
-            ; (async function fetchUsers() {
-                await apiHandler({
-                    url: `/api/users?search=${search}`,
-                    method: 'GET',
-                })
-
-            })();
-
+            fetchUsers();
         }, search != null ? 500 : 0);
         return () => clearTimeout(searchUsers);
     }, [search])
