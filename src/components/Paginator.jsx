@@ -58,6 +58,7 @@ export default function Paginator({ pagination, onPageChange }) {
                                     style={{ width: '150px', marginRight: '5px' }}
                                 />
                                 <Button type="submit" variant="primary">Go</Button>
+                                <label className="mx-2 mt-2">Total Pages: {lastPage}</label>
                             </Form>
                         </Col>
                         <Col>
